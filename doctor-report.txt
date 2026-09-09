@@ -1,0 +1,14 @@
+🩺 Crush Doctor Report
+═════════════════════════════════════════════════
+
+✓ Config System      PASS
+✓ Agent System       PASS (26 tool files)
+✓ Database           PASS
+✓ LSP Integration    PASS
+⚠ MCP Integration    WARN (mcp directory not found)
+⚠ UI/TUI             WARN (components directory not found)
+✓ Hooks System       PASS
+⚠ Skills System      WARN (discovery.go not found)
+✓ Testing            PASS (tests present)
+
+Overall: 6/9 checks passed (3 warnings)
