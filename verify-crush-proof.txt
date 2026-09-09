@@ -1,0 +1,41 @@
+CRUSH VERIFICATION SKILL - PROOF OF FUNCTIONALITY
+==================================================
+
+## Test Setup
+
+Testing the `crush doctor` command which performs comprehensive health checks
+across the Crush codebase including config, agent, database, LSP, MCP, UI, hooks,
+skills, and testing infrastructure.
+
+## Proof: Agent System Check (FAIL → PASS)
+
+### Before Fix (Agent tools directory missing):
+
+Temporarily moved internal/agent/tools to simulate a broken state:
+
+$ mv internal/agent/tools internal/agent/tools.backup
+$ ./crush doctor | grep "Agent System"
+⚠ Agent System       WARN (tools directory not found)
+
+### After Fix (Agent tools directory restored):
+
+$ mv internal/agent/tools.backup internal/agent/tools
+$ ./crush doctor | grep "Agent System"
+✓ Agent System       PASS (26 tool files)
+
+### Full Doctor Report (After Fix):
+
+🩺 Crush Doctor Report
+═════════════════════════════════════════════════
+
+✓ Config System      PASS
+✓ Agent System       PASS (26 tool files)
+✓ Database           PASS
+✓ LSP Integration    PASS
+⚠ MCP Integration    WARN (mcp directory not found)
+⚠ UI/TUI             WARN (components directory not found)
+✓ Hooks System       PASS
+⚠ Skills System      WARN (discovery.go not found)
+✓ Testing            PASS (tests present)
+
+Overall: 6/9 checks passed (3 warnings)
