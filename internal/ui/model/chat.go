@@ -419,7 +419,15 @@ func (m *Chat) SetMessages(msgs ...chat.MessageItem) tea.Cmd {
 	}
 	m.list.SetItems(items...)
 	m.ScrollToBottom()
-	return nil
+
+	// Start prewarming the render cache so that the first scrollbar draw
+	// (which needs Offset or TotalHeight) doesn't walk the entire list.
+	// Without this, loading a large session causes a ~30s hang on first
+	// scroll/render when the scrollbar calls Offset.
+	m.resizing = true
+	m.resizeSettleSeq++
+	m.warmNext = 0
+	return chatWarmCmd(m.resizeSettleSeq, 0)
 }
 
 // AppendMessages appends a new message item to the chat list.
