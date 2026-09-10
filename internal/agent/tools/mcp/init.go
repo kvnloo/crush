@@ -1118,6 +1118,11 @@ func createTransport(ctx context.Context, cfg *config.ConfigStore, name string, 
 		// cancellation kills only the direct child, orphaning the rest with
 		// PPID 1 — production accumulated 15+ such zombies over two days.
 		configureStdioProcess(cmd)
+		// Discard stderr from stdio MCP children. They communicate via JSON-RPC
+		// on stdout; any stderr output (e.g. MallocStackLogging warnings,
+		// debug logs) is not part of the protocol and would clobber the TUI if
+		// inherited.
+		cmd.Stderr = io.Discard
 		return &mcp.CommandTransport{
 			Command: cmd,
 		}, nil, nil
