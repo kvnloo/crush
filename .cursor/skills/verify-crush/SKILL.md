@@ -23,6 +23,7 @@ The verification harness follows this structure:
 ```
 .cursor/skills/verify-crush/
 ├── SKILL.md                    # This file (control orchestration)
+├── prove-one-feature.sh        # Packaged cli-basics Launch→…→Cleanup
 ├── features/
 │   ├── README.md              # Feature map overview
 │   ├── cli-basics.md          # CLI flags, help, version
@@ -85,8 +86,9 @@ The verification harness follows this structure:
   - Save outputs to evidence directory
 
 **Feature Selection**:
-- Run all features: `crush verify` (default)
-- Run specific feature: `crush verify --feature cli-basics`
+- Prove cli-basics end-to-end: `bash .cursor/skills/verify-crush/prove-one-feature.sh`
+- Other features: run `helpers/launch.sh` → `helpers/doctor.sh`, then the feature file's Driving commands against `/tmp/crush-verify`
+- There is no product `crush verify` subcommand; the harness lives under `.cursor/skills/verify-crush/`
 
 **Test Execution**:
 - Each feature defines its own test commands
@@ -155,16 +157,22 @@ See `features/README.md` for the complete feature map.
 ### Run Full Verification
 
 ```bash
-# From workspace root
-crush verify
+# From workspace root (cli-basics proof today)
+bash .cursor/skills/verify-crush/prove-one-feature.sh
 ```
 
-This executes all phases (Launch → Doctor → Drive → Evidence → Cleanup) for all mapped features.
+This executes Launch → Doctor → Drive → Evidence → Cleanup for the cli-basics feature. Other features use the same helpers plus their feature-file Driving sections.
 
 ### Verify Specific Feature
 
 ```bash
-crush verify --feature cli-basics
+# cli-basics packaged proof:
+bash .cursor/skills/verify-crush/prove-one-feature.sh
+
+# Or manually for any mapped feature:
+bash .cursor/skills/verify-crush/helpers/launch.sh
+bash .cursor/skills/verify-crush/helpers/doctor.sh
+# then run the Driving commands from features/<name>.md
 ```
 
 ### Re-run After Cleanup
@@ -176,74 +184,18 @@ cat /tmp/crush-verify-{timestamp}/evidence/SUMMARY.md
 
 ## Helpers
 
-### Launch (`helpers/launch.sh`)
+Scripts under `helpers/` are the source of truth (do not copy stale snippets from this file):
+
+- `helpers/launch.sh` — `go build -o /tmp/crush-verify .`, create `/tmp/crush-verify-$TIMESTAMP`, write path to `/tmp/crush-verify-last-dir`, smoke `--version`
+- `helpers/doctor.sh` — require `go`, executable `/tmp/crush-verify`, and the last test/evidence dirs from `/tmp/crush-verify-last-dir`
+- `helpers/cleanup.sh` — remove `/tmp/crush-verify` and workspace contents except `evidence/`
+- `prove-one-feature.sh` — packaged Launch→Doctor→Drive→Evidence→Cleanup for **cli-basics**
 
 ```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-TEST_DIR="/tmp/crush-verify-${TIMESTAMP}"
-BINARY="/tmp/crush-verify"
-
-echo "=== LAUNCH ==="
-echo "Building Crush..."
-go build -o "${BINARY}" .
-
-echo "Setting up test directory: ${TEST_DIR}"
-mkdir -p "${TEST_DIR}/evidence"
-
-echo "Verifying binary..."
-"${BINARY}" --version
-
-echo "✓ Launch complete"
-echo "Binary: ${BINARY}"
-echo "Test dir: ${TEST_DIR}"
-```
-
-### Doctor (`helpers/doctor.sh`)
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-echo "=== DOCTOR ==="
-
-echo "Checking Go toolchain..."
-go version || { echo "✗ Go not found"; exit 1; }
-
-echo "Checking binary..."
-[[ -x /tmp/crush-verify ]] || { echo "✗ Binary not executable"; exit 1; }
-
-echo "Checking test directory..."
-[[ -d /tmp/crush-verify-* ]] || { echo "✗ Test directory missing"; exit 1; }
-
-echo "✓ All checks passed"
-```
-
-### Cleanup (`helpers/cleanup.sh`)
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-echo "=== CLEANUP ==="
-
-echo "Removing binary..."
-rm -f /tmp/crush-verify
-
-echo "Finding test directory..."
-TEST_DIR=$(ls -dt /tmp/crush-verify-* 2>/dev/null | head -1)
-
-if [[ -n "${TEST_DIR}" ]]; then
-    echo "Preserving evidence: ${TEST_DIR}/evidence/"
-    echo "Removing test workspace (keeping evidence)..."
-    find "${TEST_DIR}" -mindepth 1 -maxdepth 1 ! -name evidence -exec rm -rf {} +
-    echo "✓ Cleanup complete"
-    echo "Evidence: ${TEST_DIR}/evidence/"
-else
-    echo "No test directory found"
-fi
+bash .cursor/skills/verify-crush/helpers/launch.sh
+bash .cursor/skills/verify-crush/helpers/doctor.sh
+bash .cursor/skills/verify-crush/prove-one-feature.sh
+bash .cursor/skills/verify-crush/helpers/cleanup.sh
 ```
 
 ## Implementation Notes
@@ -261,7 +213,7 @@ To add a new feature to the verification map:
 1. Create `features/{feature-name}.md` following the template
 2. Define sub-features, how to access, driving commands, and gotchas
 3. Update `features/README.md` with the new feature entry
-4. Test the feature with `crush verify --feature {feature-name}`
+4. Drive it with `helpers/launch.sh` + `helpers/doctor.sh` and the feature file's Driving section (cli-basics: `prove-one-feature.sh`)
 
 ## Constraints
 

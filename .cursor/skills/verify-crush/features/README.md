@@ -43,7 +43,7 @@ To add a new feature:
 1. Create `features/{feature-name}.md` following the template
 2. Fill in all four sections (Sub-features, How to get to it, Driving, Gotchas)
 3. Update this README with an entry in the table above
-4. Test the feature: `crush verify --feature {feature-name}`
+4. Test the feature via the skill harness: `bash .cursor/skills/verify-crush/prove-one-feature.sh` (cli-basics) or follow Driving commands in the feature file after `helpers/launch.sh` + `helpers/doctor.sh`
 
 ## Coverage Status
 
