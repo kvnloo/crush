@@ -22,6 +22,26 @@ const (
 	copilotTokenURL = "https://api.github.com/copilot_internal/v2/token"
 )
 
+// These are package vars to allow test injection.
+var (
+	testAccessTokenURL  = ""
+	testCopilotTokenURL = ""
+)
+
+func getAccessTokenURL() string {
+	if testAccessTokenURL != "" {
+		return testAccessTokenURL
+	}
+	return accessTokenURL
+}
+
+func getCopilotTokenURL() string {
+	if testCopilotTokenURL != "" {
+		return testCopilotTokenURL
+	}
+	return copilotTokenURL
+}
+
 var ErrNotAvailable = errors.New("github copilot not available")
 
 type DeviceCode struct {
@@ -66,26 +86,36 @@ func RequestDeviceCode(ctx context.Context) (*DeviceCode, error) {
 }
 
 // PollForToken polls GitHub for the access token after user authorization.
+// It ensures polling intervals comply with RFC 8628 §3.5:
+// - Never polls before the server-mandated interval has fully elapsed
+// - Adds 1-2s padding to avoid clock skew or ticker drift
+// - On slow_down, increases interval by 5s per RFC 8628 and adds padding
 func PollForToken(ctx context.Context, dc *DeviceCode) (*oauth.Token, error) {
+	const safePadding = 2 * time.Second
+
 	interval := max(dc.Interval, 5)
 	deadline := time.Now().Add(time.Duration(dc.ExpiresIn) * time.Second)
-	ticker := time.NewTicker(time.Duration(interval) * time.Second)
-	defer ticker.Stop()
+
+	// First poll after initial interval + padding.
+	nextPoll := time.Duration(interval)*time.Second + safePadding
 
 	for time.Now().Before(deadline) {
 		select {
 		case <-ctx.Done():
 			return nil, ctx.Err()
-		case <-ticker.C:
+		case <-time.After(nextPoll):
 		}
 
 		token, err := tryGetToken(ctx, dc.DeviceCode)
 		if err == errPending {
+			// Continue with same interval.
+			nextPoll = time.Duration(interval)*time.Second + safePadding
 			continue
 		}
 		if err == errSlowDown {
+			// Per RFC 8628 §3.5, increase interval by 5s and continue.
 			interval += 5
-			ticker.Reset(time.Duration(interval) * time.Second)
+			nextPoll = time.Duration(interval)*time.Second + safePadding
 			continue
 		}
 		if err != nil {
@@ -108,7 +138,7 @@ func tryGetToken(ctx context.Context, deviceCode string) (*oauth.Token, error) {
 	data.Set("device_code", deviceCode)
 	data.Set("grant_type", "urn:ietf:params:oauth:grant-type:device_code")
 
-	req, err := http.NewRequestWithContext(ctx, "POST", accessTokenURL, strings.NewReader(data.Encode()))
+	req, err := http.NewRequestWithContext(ctx, "POST", getAccessTokenURL(), strings.NewReader(data.Encode()))
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +177,7 @@ func tryGetToken(ctx context.Context, deviceCode string) (*oauth.Token, error) {
 }
 
 func getCopilotToken(ctx context.Context, githubToken string) (*oauth.Token, error) {
-	req, err := http.NewRequestWithContext(ctx, "GET", copilotTokenURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", getCopilotTokenURL(), nil)
 	if err != nil {
 		return nil, err
 	}
