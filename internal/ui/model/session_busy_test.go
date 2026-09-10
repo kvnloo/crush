@@ -492,9 +492,16 @@ func TestSetSessionMessagesGatesAnimationsOnBusy(t *testing.T) {
 		},
 	}
 
-	// When the agent is not busy, setSessionMessages must not start animations.
+	// When the agent is not busy, setSessionMessages must not start animations
+	// (but it will return the prewarm command, which is fine).
 	cmd := m.setSessionMessages(msgs)
-	require.Nil(t, cmd, "setSessionMessages must not start animations when agent is idle")
+	if cmd != nil {
+		// Execute the command to check what it returns. If it's a prewarm
+		// command, it will return chatWarmMsg.
+		msg := cmd()
+		_, isWarmMsg := msg.(chatWarmMsg)
+		require.True(t, isWarmMsg, "setSessionMessages should only return prewarm command when agent is idle, not animation commands")
+	}
 
 	// When the agent is busy, animations should start.
 	warmCaches(m, true)
