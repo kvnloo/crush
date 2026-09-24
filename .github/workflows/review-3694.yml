@@ -21,13 +21,16 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
-      ASSETS: ${{ runner.temp }}/3694-assets
-      EVIDENCE: ${{ runner.temp }}/3694-evidence
       GOTOOLCHAIN: local
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Configure scratch paths
+        shell: bash
+        run: |
+          echo "ASSETS=$RUNNER_TEMP/3694-assets" >> "$GITHUB_ENV"
+          echo "EVIDENCE=$RUNNER_TEMP/3694-evidence" >> "$GITHUB_ENV"
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
