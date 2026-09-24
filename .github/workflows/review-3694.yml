@@ -1,0 +1,96 @@
+name: Validate PR 3694 review follow-up
+
+on:
+  push:
+    branches: [ci/3694-review-finish-20260924]
+    paths:
+      - .github/workflows/review-3694.yml
+      - .github/maintenance/3694/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: crush-3694-review-finish
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.repository == 'kvnloo/crush'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ASSETS: ${{ runner.temp }}/3694-assets
+      EVIDENCE: ${{ runner.temp }}/3694-evidence
+      GOTOOLCHAIN: local
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Prepare pinned integration, preserving both parents
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$ASSETS" "$EVIDENCE"
+          cp .github/maintenance/3694/* "$ASSETS/"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          go version | tee "$EVIDENCE/toolchain.txt"
+          python3 "$ASSETS/prepare.py" assemble 2>&1 | tee "$EVIDENCE/assembly.log"
+      - name: Require the regression to fail before the fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          set +e
+          go test -json ./internal/cmd -run '^TestRunNonInteractive_ModelRefresh$' -count=1 -timeout=3m > "$EVIDENCE/baseline.jsonl" 2> "$EVIDENCE/baseline.stderr"
+          result=$?
+          set -e
+          cat "$EVIDENCE/baseline.jsonl"
+          cat "$EVIDENCE/baseline.stderr"
+          test "$result" -eq 1
+          python3 "$ASSETS/prepare.py" verify-red
+      - name: Apply the minimal error-path fix
+        run: python3 "$ASSETS/prepare.py" fix
+      - name: Run focused tests in the actual packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          go test -json ./internal/cmd ./internal/config ./internal/app -run 'TestRunNonInteractive_ModelRefresh|TestRefuseUnresolvedLarge|TestResolvedLargeLine|TestRunCmd_NoNewModelFlags|TestConfig_configureSelectedModels|TestRunStream' -count=1 -timeout=5m 2> "$EVIDENCE/focused.stderr" | tee "$EVIDENCE/focused.jsonl"
+      - name: Repeat the HTTP regression with the race detector
+        shell: bash
+        run: |
+          set -euo pipefail
+          go test -race -json ./internal/cmd -run '^TestRunNonInteractive_ModelRefresh$' -count=3 -timeout=3m 2> "$EVIDENCE/race.stderr" | tee "$EVIDENCE/race.jsonl"
+      - name: Vet the affected packages
+        shell: bash
+        run: |
+          set -euo pipefail
+          go vet ./internal/cmd ./internal/config ./internal/app 2>&1 | tee "$EVIDENCE/vet.log"
+      - name: Publish only the validated candidate branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$ASSETS/prepare.py" finish
+          git diff --stat 959ebd5d80805c3ec98d3ea49d1313e401b4e300 HEAD | tee "$EVIDENCE/diffstat.txt"
+          git push origin HEAD:refs/heads/verify/3694-review-finish-20260924
+          {
+            echo '## Validated candidate; original PR branch has not been updated'
+            echo 'Baseline: both error cases fail; successful refresh control passes.'
+            echo 'Candidate: focused tests, repeated race checks, and vet passed.'
+            echo '```json'
+            cat "$EVIDENCE/candidate.json"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain evidence, including failed validation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: crush-3694-review-evidence
+          path: ${{ runner.temp }}/3694-evidence
+          if-no-files-found: warn
+          retention-days: 14
