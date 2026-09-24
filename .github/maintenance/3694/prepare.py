@@ -50,9 +50,9 @@ def assemble(assets, evidence):
     (evidence / 'original.patch').write_text(patch)
     old_run = git('show', f'{OLD}:internal/cmd/run.go')
     git('checkout', '--detach', BASE)
-    # Preserve upstream plus the existing PR hunks in these five files.
-    # Reconcile the two run paths explicitly with the new reasoning-effort
-    # block; never use a blanket ours/theirs conflict resolution.
+    # These five files retain upstream's edits and the existing PR hunks.
+    # The two run paths require explicit reconciliation with upstream's
+    # new reasoning-effort block; no blanket ours/theirs resolution is used.
     git('apply', '--exclude=internal/cmd/run.go', '--exclude=internal/app/app.go', '-', input=patch)
     path = Path('internal/cmd/run.go')
     source = path.read_text()
@@ -73,10 +73,10 @@ def assemble(assets, evidence):
     path = Path('internal/app/app.go')
     path.write_text(replace_once(path.read_text(), spinner, '\tfmt.Fprintln(os.Stderr, app.config.Config().ResolvedLargeLine())\n\n' + spinner, 'in-process model pin'))
     subprocess.run(['gofmt', '-w', *PATHS], check=True)
-    git('diff', '--check')
+    git('add', '--', *PATHS)
+    git('diff', '--cached', '--check')
     if changed(BASE) != set(PATHS):
         raise RuntimeError('Integration changed unexpected files')
-    git('add', '--', *PATHS)
     tree = git('write-tree').strip()
     merge = git('commit-tree', tree, '-p', OLD, '-p', BASE, '-m', 'chore: merge main into headless model validation').strip()
     git('reset', '--hard', merge)
