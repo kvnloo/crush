@@ -1191,6 +1191,9 @@ func createTransport(ctx context.Context, cfg *config.ConfigStore, name string, 
 		// cancellation kills only the direct child, orphaning the rest with
 		// PPID 1 — production accumulated 15+ such zombies over two days.
 		configureStdioProcess(cmd)
+		// Stdio MCP servers speak JSON-RPC on stdout. Keep out-of-band child
+		// stderr (debug logs, runtime warnings, launcher noise) off the TUI.
+		cmd.Stderr = io.Discard
 		return &mcp.CommandTransport{
 			Command: cmd,
 		}, nil, nil
