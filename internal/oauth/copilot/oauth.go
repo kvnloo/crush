@@ -65,27 +65,33 @@ func RequestDeviceCode(ctx context.Context) (*DeviceCode, error) {
 	return &dc, nil
 }
 
+const copilotPollPadding = 2 * time.Second
+
+func copilotPollDelay(interval int) time.Duration {
+	return time.Duration(max(interval, 5))*time.Second + copilotPollPadding
+}
+
 // PollForToken polls GitHub for the access token after user authorization.
 func PollForToken(ctx context.Context, dc *DeviceCode) (*oauth.Token, error) {
 	interval := max(dc.Interval, 5)
 	deadline := time.Now().Add(time.Duration(dc.ExpiresIn) * time.Second)
-	ticker := time.NewTicker(time.Duration(interval) * time.Second)
-	defer ticker.Stop()
+	nextPoll := copilotPollDelay(interval)
 
 	for time.Now().Before(deadline) {
 		select {
 		case <-ctx.Done():
 			return nil, ctx.Err()
-		case <-ticker.C:
+		case <-time.After(nextPoll):
 		}
 
 		token, err := tryGetToken(ctx, dc.DeviceCode)
 		if err == errPending {
+			nextPoll = copilotPollDelay(interval)
 			continue
 		}
 		if err == errSlowDown {
 			interval += 5
-			ticker.Reset(time.Duration(interval) * time.Second)
+			nextPoll = copilotPollDelay(interval)
 			continue
 		}
 		if err != nil {
