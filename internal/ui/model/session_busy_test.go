@@ -537,7 +537,7 @@ func TestBusyProbeReEnablesFrozenAnimationClock(t *testing.T) {
 	// freezes the animation clock even though the agent is working.
 	require.False(t, m.isAgentBusy(), "boot: the memoized busy state is not populated yet")
 	cmd := m.setSessionMessages(msgs)
-	require.Nil(t, cmd)
+	require.NotNil(t, cmd, "the boot reload schedules cache prewarming while the clock stays frozen")
 	require.False(t, m.chat.animAllowed, "the boot reload must freeze the clock off the unpopulated cache")
 	require.Nil(t, m.chat.EnsureAnimating(), "the frozen clock must not arm")
 	require.False(t, m.chat.animRunning)
