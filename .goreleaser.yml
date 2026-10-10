@@ -42,7 +42,9 @@ before:
 #   proxy: true
 
 builds:
-  - id: default
+  # Keep this id equal to project_name: the included macOS notarize config
+  # filters binaries by project name and skips silently when none match.
+  - id: crush
     env:
       - CGO_ENABLED=0
       - GOEXPERIMENT=greenteagc
@@ -89,7 +91,7 @@ builds:
 archives:
   - id: default
     ids:
-      - default
+      - crush
     name_template: >-
       crush_
       {{- .Version }}_
