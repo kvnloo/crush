@@ -1,0 +1,12 @@
+package agent
+
+import (
+ "charm.land/fantasy"
+ "github.com/charmbracelet/crush/internal/message"
+)
+
+func NativeSmokePrepare(msgs []message.Message) []fantasy.Message {
+ a := &sessionAgent{isSubAgent: true}
+ result, _ := a.preparePrompt(msgs, false)
+ return result
+}

@@ -1,0 +1,79 @@
+?   	github.com/charmbracelet/crush	[no test files]
+ok  	github.com/charmbracelet/crush/internal/agent	5.146s
+?   	github.com/charmbracelet/crush/internal/agent/agenttest	[no test files]
+ok  	github.com/charmbracelet/crush/internal/agent/hyper	0.017s
+?   	github.com/charmbracelet/crush/internal/agent/notify	[no test files]
+ok  	github.com/charmbracelet/crush/internal/agent/prompt	0.377s
+ok  	github.com/charmbracelet/crush/internal/agent/tools	6.595s
+ok  	github.com/charmbracelet/crush/internal/agent/tools/mcp	5.292s
+?   	github.com/charmbracelet/crush/internal/ansiext	[no test files]
+ok  	github.com/charmbracelet/crush/internal/apigen	0.013s
+ok  	github.com/charmbracelet/crush/internal/app	0.096s
+ok  	github.com/charmbracelet/crush/internal/backend	6.102s
+ok  	github.com/charmbracelet/crush/internal/client	0.112s
+?   	github.com/charmbracelet/crush/internal/clipboard	[no test files]
+ok  	github.com/charmbracelet/crush/internal/cmd	1.176s
+ok  	github.com/charmbracelet/crush/internal/cmd/clientserverrace	6.626s
+ok  	github.com/charmbracelet/crush/internal/commands	0.129s
+ok  	github.com/charmbracelet/crush/internal/config	20.285s
+ok  	github.com/charmbracelet/crush/internal/csync	0.033s
+ok  	github.com/charmbracelet/crush/internal/db	0.293s
+?   	github.com/charmbracelet/crush/internal/diff	[no test files]
+ok  	github.com/charmbracelet/crush/internal/diffdetect	0.010s
+ok  	github.com/charmbracelet/crush/internal/discover	0.027s
+?   	github.com/charmbracelet/crush/internal/dns	[no test files]
+ok  	github.com/charmbracelet/crush/internal/env	0.010s
+ok  	github.com/charmbracelet/crush/internal/event	0.008s
+ok  	github.com/charmbracelet/crush/internal/filepathext	0.009s
+ok  	github.com/charmbracelet/crush/internal/filetracker	0.116s
+?   	github.com/charmbracelet/crush/internal/format	[no test files]
+ok  	github.com/charmbracelet/crush/internal/fsext	0.141s
+ok  	github.com/charmbracelet/crush/internal/gitutil	0.704s
+ok  	github.com/charmbracelet/crush/internal/herdr	0.054s
+?   	github.com/charmbracelet/crush/internal/history	[no test files]
+ok  	github.com/charmbracelet/crush/internal/home	0.010s
+ok  	github.com/charmbracelet/crush/internal/hooks	3.069s
+ok  	github.com/charmbracelet/crush/internal/lock	0.434s
+ok  	github.com/charmbracelet/crush/internal/log	0.013s
+?   	github.com/charmbracelet/crush/internal/login	[no test files]
+?   	github.com/charmbracelet/crush/internal/logout	[no test files]
+ok  	github.com/charmbracelet/crush/internal/lsp	1.073s
+ok  	github.com/charmbracelet/crush/internal/lsp/util	0.017s
+ok  	github.com/charmbracelet/crush/internal/message	0.447s
+?   	github.com/charmbracelet/crush/internal/oauth	[no test files]
+ok  	github.com/charmbracelet/crush/internal/oauth/callback	0.012s
+ok  	github.com/charmbracelet/crush/internal/oauth/copilot	0.013s
+?   	github.com/charmbracelet/crush/internal/oauth/hyper	[no test files]
+ok  	github.com/charmbracelet/crush/internal/oauth/mcp	0.072s
+ok  	github.com/charmbracelet/crush/internal/oauth/openai	0.023s
+ok  	github.com/charmbracelet/crush/internal/permission	0.071s
+ok  	github.com/charmbracelet/crush/internal/projects	0.070s
+ok  	github.com/charmbracelet/crush/internal/proto	0.051s
+?   	github.com/charmbracelet/crush/internal/pubsub	[no test files]
+?   	github.com/charmbracelet/crush/internal/question	[no test files]
+ok  	github.com/charmbracelet/crush/internal/server	3.530s
+ok  	github.com/charmbracelet/crush/internal/session	0.117s
+ok  	github.com/charmbracelet/crush/internal/shell	3.798s
+ok  	github.com/charmbracelet/crush/internal/shellconfig	0.401s
+ok  	github.com/charmbracelet/crush/internal/skills	0.124s
+ok  	github.com/charmbracelet/crush/internal/stringext	0.011s
+ok  	github.com/charmbracelet/crush/internal/ui/anim	0.045s
+ok  	github.com/charmbracelet/crush/internal/ui/attachments	0.132s
+ok  	github.com/charmbracelet/crush/internal/ui/chat	19.977s
+ok  	github.com/charmbracelet/crush/internal/ui/common	0.106s
+ok  	github.com/charmbracelet/crush/internal/ui/completions	0.086s
+ok  	github.com/charmbracelet/crush/internal/ui/dialog	0.227s
+ok  	github.com/charmbracelet/crush/internal/ui/diffview	0.834s
+ok  	github.com/charmbracelet/crush/internal/ui/exitbanner	0.105s
+ok  	github.com/charmbracelet/crush/internal/ui/image	0.065s
+ok  	github.com/charmbracelet/crush/internal/ui/list	0.141s
+?   	github.com/charmbracelet/crush/internal/ui/logo	[no test files]
+?   	github.com/charmbracelet/crush/internal/ui/logo/example	[no test files]
+ok  	github.com/charmbracelet/crush/internal/ui/model	2.074s
+ok  	github.com/charmbracelet/crush/internal/ui/notification	0.066s
+ok  	github.com/charmbracelet/crush/internal/ui/styles	0.226s
+?   	github.com/charmbracelet/crush/internal/ui/util	[no test files]
+ok  	github.com/charmbracelet/crush/internal/ui/xchroma	0.109s
+ok  	github.com/charmbracelet/crush/internal/update	0.010s
+?   	github.com/charmbracelet/crush/internal/version	[no test files]
+ok  	github.com/charmbracelet/crush/internal/workspace	4.025s
