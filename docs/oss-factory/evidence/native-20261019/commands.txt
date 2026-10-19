@@ -1,0 +1,28 @@
+Initial target recovery:
+git clone --filter=blob:none --no-checkout https://github.com/kvnloo/crush.git /root/workspace/crush-native-20261019
+git fetch https://github.com/charmbracelet/crush.git fc6e0315027f680fa78ef895d69202fa527b7b69 7bbc3bbe2e7f720504fd261a55c05b5ee856a082 7dadde0bb47649882891ab7943d17176e9b1c9c8
+git worktree add --detach /root/workspace/crush-sourcegraph-3759 fc6e0315027f680fa78ef895d69202fa527b7b69
+Observed error: git checkout: IO error while writing blob or reading file metadata or changing filetype
+git -c core.symlinks=false restore --source=fc6e0315027f680fa78ef895d69202fa527b7b69 --worktree -- . [exit0 after142s]
+git worktree add --detach /root/workspace/crush-whitespace-3760 7bbc3bbe2e7f720504fd261a55c05b5ee856a082
+Observed error: object for checkout internal/session/session_test.go could not be retrieved from object database
+git fetch --refetch --no-filter https://github.com/charmbracelet/crush.git fc6e0315027f680fa78ef895d69202fa527b7b69 7bbc3bbe2e7f720504fd261a55c05b5ee856a082
+git -c core.symlinks=false restore --source=7bbc3bbe2e7f720504fd261a55c05b5ee856a082 --worktree -- . [exit0]
+Own checkout indexes restored after runs with git restore --staged --source=HEAD -- .; git diff --exit-code HEAD -- . exit0 both.
+
+Environment for native/test/build: PATH=/root/workspace/crush-native-evidence-20261019/go/bin:$PATH CGO_ENABLED=0 GOEXPERIMENT=greenteagc GOMAXPROCS=4
+Each archived native_smoke/main.go was run with go run ./native_smoke in its exact target/control tree; controls additionally EXPECT_RED=1 (expected failing behavior asserted, process exits0 on successful reproduction). Whitespace bridge added only for execution and archived/removed afterward. Sourcegraph transport changes destination to real local httptest.Server; no real Sourcegraph credentials or remote response.
+3759: go test ./internal/agent/tools -run TestFormatSourcegraph -count=1
+3759: go test ./internal/agent/tools ./internal/message ./internal/shell -count=1
+3759: go vet ./internal/agent/tools ./internal/message ./internal/shell
+3760: go test ./internal/agent ./internal/message -count=1
+3760: go vet ./internal/agent ./internal/message
+Each target: go build -o <evidence>/crush-<PR> .
+Each target: go test -failfast ./...
+Each target: gofmt -l <both changed Go files> [empty output]
+Each target: bash scripts/check_log_capitalization.sh
+Each target with GOEXPERIMENT unset: golangci-lint run --path-mode=abs --config=.golangci.yml --timeout=5m [exit1 Goexport version incompatibility]
+go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.13.1 [exit0; GOBIN=<evidence>/bin]
+Built product: <evidence>/crush-<PR> --version [exit0; pinned SHA+dirty due own initially-missing index]
+No local race: CGO_ENABLED0; no multiOS/real provider acceptance.
+3757 original CI recovery: gh api rate_limit (core4722), then gh api repos/charmbracelet/crush/actions/jobs/110292126579/logs --allow-escape-sequences [exit0]. Origin viewerPermission READ, no rerun attempted.
