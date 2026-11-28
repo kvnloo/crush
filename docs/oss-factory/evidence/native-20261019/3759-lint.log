@@ -1,0 +1,11 @@
+/root/workspace/crush-sourcegraph-3759/internal/dns/android.go:8:2: could not import context (/root/workspace/crush-native-evidence-20261019/go/src/context/context.go:61:2: could not import errors (/root/workspace/crush-native-evidence-20261019/go/src/errors/wrap.go:8:2: could not import internal/reflectlite (/root/workspace/crush-native-evidence-20261019/go/src/internal/reflectlite/swapper.go:8:2: could not import internal/goarch (-: could not load export data: internal error in importing "internal/goarch" (cannot decode "internal/goarch", export data version 5 is greater than maximum supported version 4); please report an issue)))) (typecheck)
+	"context"
+	^
+/root/workspace/crush-sourcegraph-3759/internal/dns/android.go:9:2: could not import net (/root/workspace/crush-native-evidence-20261019/go/src/net/addrselect.go:10:2: could not import net/netip (/root/workspace/crush-native-evidence-20261019/go/src/net/netip/netip.go:15:2: could not import cmp (-: could not load export data: internal error in importing "cmp" (cannot decode "cmp", export data version 5 is greater than maximum supported version 4); please report an issue))) (typecheck)
+	"net"
+	^
+/root/workspace/crush-sourcegraph-3759/internal/dns/android.go:10:2: could not import os (/root/workspace/crush-native-evidence-20261019/go/src/os/dir.go:8:2: could not import internal/bytealg (/root/workspace/crush-native-evidence-20261019/go/src/internal/bytealg/bytealg.go:8:2: could not import internal/cpu (-: could not load export data: internal error in importing "internal/cpu" (cannot decode "internal/cpu", export data version 5 is greater than maximum supported version 4); please report an issue))) (typecheck)
+	"os"
+	^
+3 issues:
+* typecheck: 3

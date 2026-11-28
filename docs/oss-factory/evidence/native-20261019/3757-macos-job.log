@@ -1,0 +1,567 @@
+﻿2026-10-01T08:48:48.3966280Z Current runner version: '2.337.0'
+2026-10-01T08:48:48.3996630Z ##[group]Runner Image Provisioner
+2026-10-01T08:48:48.3998290Z Hosted Compute Agent
+2026-10-01T08:48:48.3999310Z Version: 20260828.587
+2026-10-01T08:48:48.4000470Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-10-01T08:48:48.4001800Z Build Date: 2026-08-28T16:44:25Z
+2026-10-01T08:48:48.4003010Z Worker ID: {6314be2e-dd6b-4d11-b1c0-3ded1336e9b7}
+2026-10-01T08:48:48.4004300Z Azure Region: westus
+2026-10-01T08:48:48.4005330Z ##[endgroup]
+2026-10-01T08:48:48.4024440Z ##[group]Operating System
+2026-10-01T08:48:48.4025000Z macOS
+2026-10-01T08:48:48.4025360Z 26.6.2
+2026-10-01T08:48:48.4025810Z 25G83
+2026-10-01T08:48:48.4026260Z ##[endgroup]
+2026-10-01T08:48:48.4026650Z ##[group]Runner Image
+2026-10-01T08:48:48.4027050Z Image: macos-26-arm64
+2026-10-01T08:48:48.4027680Z Version: 20260907.0351.1
+2026-10-01T08:48:48.4028760Z Included Software: https://github.com/actions/runner-images/blob/macos-26-arm64/20260907.0351/images/macos/macos-26-arm64-Readme.md
+2026-10-01T08:48:48.4030070Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-26-arm64%2F20260907.0351
+2026-10-01T08:48:48.4030760Z ##[endgroup]
+2026-10-01T08:48:48.4031740Z ##[group]GITHUB_TOKEN Permissions
+2026-10-01T08:48:48.4033590Z Contents: read
+2026-10-01T08:48:48.4034090Z Metadata: read
+2026-10-01T08:48:48.4034840Z ##[endgroup]
+2026-10-01T08:48:48.4036650Z Secret source: None
+2026-10-01T08:48:48.4037290Z Cache mode: write
+2026-10-01T08:48:48.4037910Z Prepare workflow directory
+2026-10-01T08:48:48.4537320Z Prepare all required actions
+2026-10-01T08:48:48.4609700Z Getting action download info
+2026-10-01T08:48:48.9621600Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-01T08:48:49.3827240Z Download action repository 'actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e' (SHA:b7ad1dad31e06c5925ef5d2fc7ad053ef454303e)
+2026-10-01T08:48:50.1187060Z Complete job name: build (macos-latest)
+2026-10-01T08:48:50.2472880Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-10-01T08:48:50.2473770Z with:
+2026-10-01T08:48:50.2474130Z   persist-credentials: false
+2026-10-01T08:48:50.2474680Z   repository: charmbracelet/crush
+2026-10-01T08:48:50.2477700Z   token: ***
+2026-10-01T08:48:50.2478170Z   ssh-strict: true
+2026-10-01T08:48:50.2478600Z   ssh-user: git
+2026-10-01T08:48:50.2479190Z   clean: true
+2026-10-01T08:48:50.2479650Z   sparse-checkout-cone-mode: true
+2026-10-01T08:48:50.2480070Z   fetch-depth: 1
+2026-10-01T08:48:50.2480570Z   fetch-tags: false
+2026-10-01T08:48:50.2480930Z   show-progress: true
+2026-10-01T08:48:50.2481350Z   lfs: false
+2026-10-01T08:48:50.2481700Z   submodules: false
+2026-10-01T08:48:50.2482130Z   set-safe-directory: true
+2026-10-01T08:48:50.2482590Z   allow-unsafe-pr-checkout: false
+2026-10-01T08:48:50.2483570Z ##[endgroup]
+2026-10-01T08:48:51.0146010Z Syncing repository: charmbracelet/crush
+2026-10-01T08:48:51.0148000Z ##[group]Getting Git version info
+2026-10-01T08:48:51.0148590Z Working directory is '/Users/runner/work/crush/crush'
+2026-10-01T08:48:51.0149400Z [command]/opt/homebrew/bin/git version
+2026-10-01T08:48:51.0789010Z git version 2.55.0
+2026-10-01T08:48:51.0814800Z ##[endgroup]
+2026-10-01T08:48:51.0828410Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/00ec5822-777f-43b3-a130-a7d59019a6bd/.gitconfig'
+2026-10-01T08:48:51.0832160Z Temporarily overriding HOME='/Users/runner/work/_temp/00ec5822-777f-43b3-a130-a7d59019a6bd' before making global git config changes
+2026-10-01T08:48:51.0835420Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-01T08:48:51.0840960Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/crush/crush
+2026-10-01T08:48:51.1009490Z Deleting the contents of '/Users/runner/work/crush/crush'
+2026-10-01T08:48:51.1012630Z ##[group]Determining repository object format
+2026-10-01T08:48:51.1015070Z ##[endgroup]
+2026-10-01T08:48:51.1019250Z ##[group]Initializing the repository
+2026-10-01T08:48:51.1021100Z [command]/opt/homebrew/bin/git init /Users/runner/work/crush/crush
+2026-10-01T08:48:51.1378570Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-01T08:48:51.1379630Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-01T08:48:51.1380600Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-01T08:48:51.1381320Z hint: call:
+2026-10-01T08:48:51.1381800Z hint:
+2026-10-01T08:48:51.1382350Z hint: 	git config --global init.defaultBranch <name>
+2026-10-01T08:48:51.1383040Z hint:
+2026-10-01T08:48:51.1383540Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-01T08:48:51.1384400Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-01T08:48:51.1385040Z hint:
+2026-10-01T08:48:51.1385710Z hint: 	git branch -m <name>
+2026-10-01T08:48:51.1386250Z hint:
+2026-10-01T08:48:51.1386920Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-01T08:48:51.1387920Z Initialized empty Git repository in /Users/runner/work/crush/crush/.git/
+2026-10-01T08:48:51.1401270Z [command]/opt/homebrew/bin/git remote add origin https://github.com/charmbracelet/crush
+2026-10-01T08:48:51.1548990Z ##[endgroup]
+2026-10-01T08:48:51.1551270Z ##[group]Disabling automatic garbage collection
+2026-10-01T08:48:51.1553550Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+2026-10-01T08:48:51.1641910Z ##[endgroup]
+2026-10-01T08:48:51.1645060Z ##[group]Setting up auth
+2026-10-01T08:48:51.1652210Z Removing SSH command configuration
+2026-10-01T08:48:51.1654250Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-01T08:48:51.1743330Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-01T08:48:51.3032060Z Removing HTTP extra header
+2026-10-01T08:48:51.3035520Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-01T08:48:51.3122640Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-01T08:48:51.4288530Z Removing includeIf entries pointing to credentials config files
+2026-10-01T08:48:51.4300470Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-01T08:48:51.4376700Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-01T08:48:51.5870840Z [command]/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-01T08:48:51.6059540Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/crush/crush/.git.path /Users/runner/work/_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config
+2026-10-01T08:48:51.6200060Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/crush/crush/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config
+2026-10-01T08:48:51.6310890Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config
+2026-10-01T08:48:51.6427620Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config
+2026-10-01T08:48:51.6512920Z ##[endgroup]
+2026-10-01T08:48:51.6515340Z ##[group]Fetching the repository
+2026-10-01T08:48:51.6517220Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +665cc1c50eb816c876f46d306976740d00b60aa5:refs/remotes/pull/3757/merge
+2026-10-01T08:48:52.4728880Z From https://github.com/charmbracelet/crush
+2026-10-01T08:48:52.4743610Z  * [new ref]         665cc1c50eb816c876f46d306976740d00b60aa5 -> pull/3757/merge
+2026-10-01T08:48:52.4759180Z ##[endgroup]
+2026-10-01T08:48:52.4760410Z ##[group]Determining the checkout info
+2026-10-01T08:48:52.4761840Z ##[endgroup]
+2026-10-01T08:48:52.4788040Z [command]/opt/homebrew/bin/git sparse-checkout disable
+2026-10-01T08:48:52.5042020Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-01T08:48:52.5174050Z ##[group]Checking out the ref
+2026-10-01T08:48:52.5181110Z [command]/opt/homebrew/bin/git checkout --progress --force refs/remotes/pull/3757/merge
+2026-10-01T08:48:52.8476490Z HEAD is now at 665cc1c Merge de62417b4ca3197cb45352f08f1de44672ce4eba into 76cc5c574e15072b15aaed0f4f843a5711fae0d9
+2026-10-01T08:48:52.8534560Z ##[endgroup]
+2026-10-01T08:48:52.8814890Z [command]/opt/homebrew/bin/git log -1 --format=%H
+2026-10-01T08:48:52.8918220Z 665cc1c50eb816c876f46d306976740d00b60aa5
+2026-10-01T08:48:52.8930470Z ##[group]Removing auth
+2026-10-01T08:48:52.8930980Z Removing SSH command configuration
+2026-10-01T08:48:52.8934070Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-01T08:48:52.9088310Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-01T08:48:53.0635530Z Removing HTTP extra header
+2026-10-01T08:48:53.0662680Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-01T08:48:53.0795530Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-01T08:48:53.2324210Z Removing includeIf entries pointing to credentials config files
+2026-10-01T08:48:53.2329620Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-01T08:48:53.2471110Z includeif.gitdir:/Users/runner/work/crush/crush/.git.path
+2026-10-01T08:48:53.2471690Z includeif.gitdir:/Users/runner/work/crush/crush/.git/worktrees/*.path
+2026-10-01T08:48:53.2472400Z includeif.gitdir:/github/workspace/.git.path
+2026-10-01T08:48:53.2472750Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-01T08:48:53.2487430Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/crush/crush/.git.path
+2026-10-01T08:48:53.2566330Z /Users/runner/work/_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config
+2026-10-01T08:48:53.2588740Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/crush/crush/.git.path \/Users\/runner\/work\/_temp\/git\-credentials\-d180dc3a\-0859\-482f\-bdc2\-aecf850071d9\.config
+2026-10-01T08:48:53.2684180Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/crush/crush/.git/worktrees/*.path
+2026-10-01T08:48:53.2760680Z /Users/runner/work/_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config
+2026-10-01T08:48:53.2780670Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/crush/crush/.git/worktrees/*.path \/Users\/runner\/work\/_temp\/git\-credentials\-d180dc3a\-0859\-482f\-bdc2\-aecf850071d9\.config
+2026-10-01T08:48:53.2939320Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-01T08:48:53.3066850Z /github/runner_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config
+2026-10-01T08:48:53.3076860Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-d180dc3a\-0859\-482f\-bdc2\-aecf850071d9\.config
+2026-10-01T08:48:53.3178260Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-01T08:48:53.3305200Z /github/runner_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config
+2026-10-01T08:48:53.3325640Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-d180dc3a\-0859\-482f\-bdc2\-aecf850071d9\.config
+2026-10-01T08:48:53.3463870Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-01T08:48:53.5174910Z Removing credentials config '/Users/runner/work/_temp/git-credentials-d180dc3a-0859-482f-bdc2-aecf850071d9.config'
+2026-10-01T08:48:53.5189860Z ##[endgroup]
+2026-10-01T08:48:53.5761310Z ##[group]Run actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+2026-10-01T08:48:53.5761690Z with:
+2026-10-01T08:48:53.5761870Z   go-version-file: go.mod
+2026-10-01T08:48:53.5762070Z   check-latest: false
+2026-10-01T08:48:53.5764680Z   token: ***
+2026-10-01T08:48:53.5764890Z   cache: true
+2026-10-01T08:48:53.5765090Z ##[endgroup]
+2026-10-01T08:48:53.9046500Z Setup go version spec 1.27.0
+2026-10-01T08:48:53.9226590Z Attempting to download 1.27.0...
+2026-10-01T08:48:54.6468730Z matching 1.27.0...
+2026-10-01T08:48:54.6520740Z Acquiring 1.27.0 from https://github.com/actions/go-versions/releases/download/1.27.0-32325163857/go-1.27.0-darwin-arm64.tar.gz
+2026-10-01T08:48:55.5959010Z Extracting Go...
+2026-10-01T08:48:55.6290390Z [command]/usr/bin/tar xz -C /Users/runner/work/_temp/6f5920f0-101d-4ec8-b45c-571017cec77e -f /Users/runner/work/_temp/38d7d192-f342-40bc-86cd-dba38ddc9376
+2026-10-01T08:49:00.2080780Z Successfully extracted go to /Users/runner/work/_temp/6f5920f0-101d-4ec8-b45c-571017cec77e
+2026-10-01T08:49:00.2083320Z Adding to the cache ...
+2026-10-01T08:49:25.8144610Z Successfully cached go to /Users/runner/hostedtoolcache/go/1.27.0/arm64
+2026-10-01T08:49:25.8148340Z Added go to the path
+2026-10-01T08:49:25.8156320Z Successfully set up Go version 1.27.0
+2026-10-01T08:49:26.0689900Z [command]/Users/runner/hostedtoolcache/go/1.27.0/arm64/bin/go env GOCACHE
+2026-10-01T08:49:26.0705500Z [command]/Users/runner/hostedtoolcache/go/1.27.0/arm64/bin/go env GOMODCACHE
+2026-10-01T08:49:26.0791200Z /Users/runner/Library/Caches/go-build
+2026-10-01T08:49:26.0815630Z /Users/runner/go/pkg/mod
+2026-10-01T08:49:26.4403440Z Cache is not found
+2026-10-01T08:49:26.4468820Z go version go1.27.0 darwin/arm64
+2026-10-01T08:49:26.4469850Z 
+2026-10-01T08:49:26.4471400Z ##[group]go env
+2026-10-01T08:49:29.6947190Z AR='ar'
+2026-10-01T08:49:29.6948160Z CC='clang'
+2026-10-01T08:49:29.6949410Z CGO_CFLAGS='-O2 -g'
+2026-10-01T08:49:29.6955700Z CGO_CPPFLAGS=''
+2026-10-01T08:49:29.6957330Z CGO_CXXFLAGS='-O2 -g'
+2026-10-01T08:49:29.6959700Z CGO_ENABLED='1'
+2026-10-01T08:49:29.6960240Z CGO_FFLAGS='-O2 -g'
+2026-10-01T08:49:29.6960790Z CGO_LDFLAGS='-O2 -g'
+2026-10-01T08:49:29.6961220Z CXX='clang++'
+2026-10-01T08:49:29.6961720Z GCCGO='gccgo'
+2026-10-01T08:49:29.6962080Z GO111MODULE=''
+2026-10-01T08:49:29.6962480Z GOARCH='arm64'
+2026-10-01T08:49:29.6962790Z GOARM64='v8.0'
+2026-10-01T08:49:29.6963250Z GOAUTH='netrc'
+2026-10-01T08:49:29.6963730Z GOBIN='/Users/runner/go/bin'
+2026-10-01T08:49:29.6964170Z GOCACHE='/Users/runner/Library/Caches/go-build'
+2026-10-01T08:49:29.6964620Z GOCACHEPROG=''
+2026-10-01T08:49:29.6964960Z GODEBUG=''
+2026-10-01T08:49:29.6965520Z GOENV='/Users/runner/Library/Application Support/go/env'
+2026-10-01T08:49:29.6965940Z GOEXE=''
+2026-10-01T08:49:29.6966360Z GOEXPERIMENT=''
+2026-10-01T08:49:29.6966750Z GOFIPS140='off'
+2026-10-01T08:49:29.6967200Z GOFLAGS=''
+2026-10-01T08:49:29.6968670Z GOGCCFLAGS='-fPIC -arch arm64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -ffile-prefix-map=/var/folders/36/tjdph2t965j8snz9_vkdnw0r0000gn/T/go-build268258492=/tmp/go-build -gno-record-gcc-switches -fno-common'
+2026-10-01T08:49:29.6986370Z GOHOSTARCH='arm64'
+2026-10-01T08:49:29.6987680Z GOHOSTOS='darwin'
+2026-10-01T08:49:29.6989560Z GOINSECURE=''
+2026-10-01T08:49:29.6990050Z GOMOD='/Users/runner/work/crush/crush/go.mod'
+2026-10-01T08:49:29.6994490Z GOMODCACHE='/Users/runner/go/pkg/mod'
+2026-10-01T08:49:29.6995870Z GONOPROXY=''
+2026-10-01T08:49:29.6996220Z GONOSUMDB=''
+2026-10-01T08:49:29.6997860Z GOOS='darwin'
+2026-10-01T08:49:29.6998340Z GOPACKAGESDRIVER=''
+2026-10-01T08:49:29.6998980Z GOPATH='/Users/runner/go'
+2026-10-01T08:49:29.6999650Z GOPRIVATE=''
+2026-10-01T08:49:29.7000070Z GOPROXY='https://proxy.golang.org,direct'
+2026-10-01T08:49:29.7000660Z GOROOT='/Users/runner/hostedtoolcache/go/1.27.0/arm64'
+2026-10-01T08:49:29.7001130Z GOSUMDB='sum.golang.org'
+2026-10-01T08:49:29.7001850Z GOTELEMETRY='local'
+2026-10-01T08:49:29.7009500Z GOTELEMETRYDIR='/Users/runner/Library/Application Support/go/telemetry'
+2026-10-01T08:49:29.7015080Z GOTMPDIR=''
+2026-10-01T08:49:29.7015540Z GOTOOLCHAIN='local'
+2026-10-01T08:49:29.7016420Z GOTOOLDIR='/Users/runner/hostedtoolcache/go/1.27.0/arm64/pkg/tool/darwin_arm64'
+2026-10-01T08:49:29.7018450Z GOVCS=''
+2026-10-01T08:49:29.7019470Z GOVERSION='go1.27.0'
+2026-10-01T08:49:29.7020170Z GOWORK=''
+2026-10-01T08:49:29.7020530Z PKG_CONFIG='pkg-config'
+2026-10-01T08:49:29.7020850Z 
+2026-10-01T08:49:29.7022300Z ##[endgroup]
+2026-10-01T08:49:29.7679420Z ##[group]Run go mod tidy
+2026-10-01T08:49:29.7679850Z [36;1mgo mod tidy[0m
+2026-10-01T08:49:29.8034260Z shell: /bin/bash -e {0}
+2026-10-01T08:49:29.8034490Z env:
+2026-10-01T08:49:29.8034840Z   GOTOOLCHAIN: local
+2026-10-01T08:49:29.8035090Z ##[endgroup]
+2026-10-01T08:49:30.0945210Z go: downloading github.com/joho/godotenv v1.5.1
+2026-10-01T08:49:30.1329500Z go: downloading charm.land/catwalk v0.52.49
+2026-10-01T08:49:30.2289410Z go: downloading charm.land/fantasy v0.45.1
+2026-10-01T08:49:30.4221490Z go: downloading github.com/stretchr/testify v1.12.1
+2026-10-01T08:49:30.6405930Z go: downloading github.com/JohannesKaufmann/html-to-markdown v1.6.0
+2026-10-01T08:49:30.6446800Z go: downloading github.com/PuerkitoBio/goquery v1.13.0
+2026-10-01T08:49:30.7224770Z go: downloading github.com/charmbracelet/x/ansi v0.11.8
+2026-10-01T08:49:30.7526840Z go: downloading github.com/charmbracelet/x/powernap v0.1.6
+2026-10-01T08:49:30.7941630Z go: downloading golang.org/x/net v0.58.0
+2026-10-01T08:49:30.7952420Z go: downloading charm.land/lipgloss/v2 v2.0.6
+2026-10-01T08:49:31.0015420Z go: downloading github.com/modelcontextprotocol/go-sdk v1.7.1-0.20260825092617-32404652e60b
+2026-10-01T08:49:31.0033720Z go: downloading github.com/charmbracelet/openai-go v0.0.0-20260921175203-216db9e71b83
+2026-10-01T08:49:31.2009600Z go: downloading github.com/charmbracelet/x/exp/charmtone v0.1.0
+2026-10-01T08:49:31.2181130Z go: downloading github.com/qjebbs/go-jsons v1.0.0-alpha.6
+2026-10-01T08:49:31.2916280Z go: downloading golang.org/x/oauth2 v0.37.0
+2026-10-01T08:49:31.4124160Z go: downloading github.com/tidwall/sjson v1.2.5
+2026-10-01T08:49:31.4522310Z go: downloading golang.org/x/sync v0.23.0
+2026-10-01T08:49:31.4613830Z go: downloading charm.land/x/vcr v0.1.1
+2026-10-01T08:49:31.4740040Z go: downloading go.uber.org/goleak v1.3.0
+2026-10-01T08:49:31.5330260Z go: downloading charm.land/bubbletea/v2 v2.0.9
+2026-10-01T08:49:31.5625570Z go: downloading github.com/Microsoft/go-winio v0.6.2
+2026-10-01T08:49:31.5663330Z go: downloading github.com/google/uuid v1.6.0
+2026-10-01T08:49:31.6037940Z go: downloading github.com/charmbracelet/x/exp/strings v0.1.0
+2026-10-01T08:49:31.6845150Z go: downloading github.com/charmbracelet/x/term v0.2.2
+2026-10-01T08:49:31.6977710Z go: downloading golang.design/x/clipboard v0.9.0
+2026-10-01T08:49:31.7318550Z go: downloading charm.land/fang/v2 v2.0.1
+2026-10-01T08:49:31.7409650Z go: downloading github.com/charmbracelet/x/etag v0.2.0
+2026-10-01T08:49:31.7529050Z go: downloading charm.land/log/v2 v2.0.1
+2026-10-01T08:49:31.8025930Z go: downloading github.com/charmbracelet/colorprofile v0.4.3
+2026-10-01T08:49:31.8072640Z go: downloading github.com/invopop/jsonschema v0.14.0
+2026-10-01T08:49:31.8188420Z go: downloading github.com/charmbracelet/ultraviolet v0.0.0-20260811164956-006e29f97886
+2026-10-01T08:49:31.8212500Z go: downloading github.com/tidwall/gjson v1.19.0
+2026-10-01T08:49:31.8574080Z go: downloading github.com/mattn/go-isatty v0.0.24
+2026-10-01T08:49:31.8704260Z go: downloading github.com/nxadm/tail v1.4.11
+2026-10-01T08:49:31.9094130Z go: downloading golang.org/x/sys v0.48.0
+2026-10-01T08:49:31.9656350Z go: downloading github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
+2026-10-01T08:49:31.9740750Z go: downloading github.com/spf13/cobra v1.10.2
+2026-10-01T08:49:31.9811990Z go: downloading github.com/aymanbagabas/go-udiff v0.4.1
+2026-10-01T08:49:32.0293150Z go: downloading github.com/ncruces/go-sqlite3 v0.35.4
+2026-10-01T08:49:32.3221760Z go: downloading github.com/pressly/goose/v3 v3.28.0
+2026-10-01T08:49:32.3241740Z go: downloading modernc.org/sqlite v1.58.0
+2026-10-01T08:49:32.4516930Z go: downloading github.com/denisbrodbeck/machineid v1.0.1
+2026-10-01T08:49:32.4704380Z go: downloading github.com/posthog/posthog-go v1.25.1
+2026-10-01T08:49:32.4862930Z go: downloading github.com/bmatcuk/doublestar/v4 v4.10.0
+2026-10-01T08:49:32.5635060Z go: downloading github.com/charlievieth/fastwalk v1.0.14
+2026-10-01T08:49:32.6724770Z go: downloading github.com/go-git/go-git/v5 v5.19.2
+2026-10-01T08:49:33.0253060Z go: downloading mvdan.cc/sh/v3 v3.14.1
+2026-10-01T08:49:33.3277050Z go: downloading gopkg.in/natefinch/lumberjack.v2 v2.2.1
+2026-10-01T08:49:33.3290900Z go: downloading charm.land/bubbles/v2 v2.2.1
+2026-10-01T08:49:33.3795730Z go: downloading github.com/sourcegraph/jsonrpc2 v0.2.2
+2026-10-01T08:49:33.4440710Z go: downloading github.com/zeebo/xxh3 v1.1.0
+2026-10-01T08:49:33.5117140Z go: downloading github.com/charmbracelet/x/exp/slice v0.1.0
+2026-10-01T08:49:33.5159850Z go: downloading github.com/itchyny/gojq v0.12.19
+2026-10-01T08:49:33.5251270Z go: downloading mvdan.cc/sh/x v0.0.0-20260907232430-b5028a3332a4
+2026-10-01T08:49:33.5469920Z go: downloading gopkg.in/yaml.v3 v3.0.1
+2026-10-01T08:49:33.6858920Z go: downloading github.com/go-viper/mapstructure/v2 v2.5.0
+2026-10-01T08:49:33.7093420Z go: downloading github.com/anthropics/anthropic-sdk-go v1.68.0
+2026-10-01T08:49:33.9945170Z go: downloading github.com/aws/aws-sdk-go-v2 v1.45.1
+2026-10-01T08:49:33.9953430Z go: downloading github.com/aws/aws-sdk-go-v2/config v1.33.1
+2026-10-01T08:49:34.2639840Z go: downloading github.com/aws/smithy-go v1.28.1
+2026-10-01T08:49:34.2665670Z go: downloading golang.org/x/text v0.41.0
+2026-10-01T08:49:35.2338740Z go: downloading github.com/andybalholm/cascadia v1.3.4
+2026-10-01T08:49:35.2444450Z go: downloading github.com/lucasb-eyer/go-colorful v1.4.1
+2026-10-01T08:49:35.3575450Z go: downloading cloud.google.com/go/auth v0.23.2
+2026-10-01T08:49:35.4019240Z go: downloading google.golang.org/genai v1.70.0
+2026-10-01T08:49:35.5429150Z go: downloading cloud.google.com/go v0.123.0
+2026-10-01T08:49:35.5631730Z go: downloading github.com/yuin/goldmark v1.7.17
+2026-10-01T08:49:35.6604230Z go: downloading charm.land/glamour/v2 v2.0.1
+2026-10-01T08:49:35.6844900Z go: downloading github.com/clipperhouse/displaywidth v0.11.0
+2026-10-01T08:49:35.7204190Z go: downloading github.com/clipperhouse/uax29/v2 v2.7.0
+2026-10-01T08:49:35.7419170Z go: downloading github.com/mattn/go-runewidth v0.0.27
+2026-10-01T08:49:35.7577770Z go: downloading github.com/alecthomas/chroma/v2 v2.27.0
+2026-10-01T08:49:35.9423470Z go: downloading github.com/sebdah/goldie/v2 v2.5.3
+2026-10-01T08:49:36.1264720Z go: downloading github.com/rivo/uniseg v0.4.7
+2026-10-01T08:49:36.1268260Z go: downloading github.com/charmbracelet/x/exp/ordered v0.1.0
+2026-10-01T08:49:36.1358790Z go: downloading github.com/sahilm/fuzzy v0.1.3
+2026-10-01T08:49:36.1789580Z go: downloading github.com/dustin/go-humanize v1.0.1
+2026-10-01T08:49:36.2057990Z go: downloading github.com/charmbracelet/x/exp/golden v0.1.0
+2026-10-01T08:49:36.2607010Z go: downloading github.com/google/go-cmp v0.7.0
+2026-10-01T08:49:36.3136830Z go: downloading github.com/jordanella/go-ansi-paintbrush v0.0.0-20240728195301-b7ad996ecf3d
+2026-10-01T08:49:36.3142480Z go: downloading github.com/disintegration/imaging v1.6.2
+2026-10-01T08:49:36.3204760Z go: downloading github.com/google/jsonschema-go v0.4.3
+2026-10-01T08:49:36.3888250Z go: downloading github.com/yosida95/uritemplate/v3 v3.0.2
+2026-10-01T08:49:36.3920160Z go: downloading golang.org/x/time v0.15.0
+2026-10-01T08:49:36.3936340Z go: downloading golang.org/x/tools v0.49.0
+2026-10-01T08:49:36.4087550Z go: downloading github.com/MakeNowJust/heredoc v1.0.0
+2026-10-01T08:49:36.4122010Z go: downloading github.com/tidwall/pretty v1.2.1
+2026-10-01T08:49:36.4226140Z go: downloading github.com/charmbracelet/x/editor v0.2.0
+2026-10-01T08:49:36.4306580Z go: downloading go.yaml.in/yaml/v4 v4.0.0-rc.3
+2026-10-01T08:49:36.4307730Z go: downloading gopkg.in/dnaeon/go-vcr.v4 v4.0.6-0.20251110073552-01de4eb40290
+2026-10-01T08:49:36.4502790Z go: downloading github.com/gen2brain/beeep v0.11.2
+2026-10-01T08:49:36.4815340Z go: downloading github.com/muesli/cancelreader v0.2.2
+2026-10-01T08:49:36.5020640Z go: downloading github.com/ebitengine/purego v0.11.0-alpha.9
+2026-10-01T08:49:36.5883350Z go: downloading golang.design/x/x11 v0.2.0
+2026-10-01T08:49:36.5886840Z go: downloading golang.org/x/image v0.45.0
+2026-10-01T08:49:37.0873300Z go: downloading golang.org/x/mobile v0.0.0-20250606033058-a2a15c67f36f
+2026-10-01T08:49:37.0925480Z go: downloading github.com/mitchellh/mapstructure v1.5.0
+2026-10-01T08:49:37.1235730Z go: downloading github.com/muesli/mango-cobra v1.2.0
+2026-10-01T08:49:37.1431810Z go: downloading github.com/muesli/roff v0.1.0
+2026-10-01T08:49:37.1751440Z go: downloading github.com/spf13/pflag v1.0.9
+2026-10-01T08:49:37.2206380Z go: downloading github.com/go-logfmt/logfmt v0.6.1
+2026-10-01T08:49:37.2435130Z go: downloading golang.org/x/exp v0.0.0-20260824195058-e88cd73687aa
+2026-10-01T08:49:37.3954910Z go: downloading github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e
+2026-10-01T08:49:37.4426090Z go: downloading github.com/pb33f/ordered-map/v2 v2.3.1
+2026-10-01T08:49:37.4724700Z go: downloading github.com/tidwall/match v1.1.1
+2026-10-01T08:49:37.4834960Z go: downloading gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7
+2026-10-01T08:49:37.4974050Z go: downloading github.com/charmbracelet/x/termios v0.1.1
+2026-10-01T08:49:37.5149960Z go: downloading github.com/charmbracelet/x/windows v0.2.2
+2026-10-01T08:49:37.5316480Z go: downloading github.com/inconshreveable/mousetrap v1.1.0
+2026-10-01T08:49:37.5457240Z go: downloading github.com/ncruces/go-sqlite3-wasm/v5 v5.0.35304
+2026-10-01T08:49:37.5658280Z go: downloading github.com/ncruces/julianday v1.0.0
+2026-10-01T08:49:37.5986150Z go: downloading github.com/sethvargo/go-retry v0.4.0
+2026-10-01T08:49:37.6028010Z go: downloading go.uber.org/multierr v1.11.0
+2026-10-01T08:49:37.6192220Z go: downloading github.com/andybalholm/brotli v1.2.3
+2026-10-01T08:49:37.6215880Z go: downloading github.com/goccy/go-json v0.10.6
+2026-10-01T08:49:37.7253210Z go: downloading github.com/hashicorp/golang-lru/v2 v2.0.7
+2026-10-01T08:49:37.7487860Z go: downloading github.com/klauspost/compress v1.19.2
+2026-10-01T08:49:37.8356810Z go: downloading github.com/go-git/go-billy/v5 v5.9.0
+2026-10-01T08:49:37.8777670Z go: downloading gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
+2026-10-01T08:49:37.9396180Z go: downloading github.com/go-quicktest/qt v1.102.0
+2026-10-01T08:49:38.1857570Z go: downloading github.com/gorilla/websocket v1.5.3
+2026-10-01T08:49:38.2083480Z go: downloading github.com/klauspost/cpuid/v2 v2.3.0
+2026-10-01T08:49:38.2199970Z go: downloading github.com/zeebo/assert v1.3.0
+2026-10-01T08:49:38.2308890Z go: downloading golang.org/x/term v0.45.0
+2026-10-01T08:49:38.2399960Z go: downloading github.com/creack/pty v1.1.24
+2026-10-01T08:49:38.2457070Z go: downloading github.com/u-root/u-root v0.15.1-0.20251208185023-2f8c7e763cf8
+2026-10-01T08:49:41.1474030Z go: downloading github.com/itchyny/timefmt-go v0.1.8
+2026-10-01T08:49:41.1583600Z go: downloading github.com/golang-jwt/jwt/v5 v5.3.1
+2026-10-01T08:49:41.1690430Z go: downloading github.com/coder/websocket v1.8.15
+2026-10-01T08:49:41.1823940Z go: downloading github.com/kaptinlin/jsonschema v0.9.9
+2026-10-01T08:49:41.2423510Z go: downloading github.com/standard-webhooks/standard-webhooks/libraries v0.0.1
+2026-10-01T08:49:41.2635180Z go: downloading google.golang.org/api v0.294.0
+2026-10-01T08:49:41.6552880Z go: downloading github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.20
+2026-10-01T08:49:41.7084050Z go: downloading github.com/aws/aws-sdk-go-v2/credentials v1.20.1
+2026-10-01T08:49:41.7762000Z go: downloading github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.19.1
+2026-10-01T08:49:41.7983080Z go: downloading github.com/aws/aws-sdk-go-v2/service/signin v1.7.1
+2026-10-01T08:49:41.8549650Z go: downloading github.com/aws/aws-sdk-go-v2/service/sso v1.35.1
+2026-10-01T08:49:41.8775000Z go: downloading github.com/aws/aws-sdk-go-v2/service/ssooidc v1.40.1
+2026-10-01T08:49:41.9300920Z go: downloading github.com/aws/aws-sdk-go-v2/service/sts v1.47.1
+2026-10-01T08:49:41.9720830Z go: downloading cloud.google.com/go/compute/metadata v0.9.0
+2026-10-01T08:49:41.9957300Z go: downloading modernc.org/libc v1.75.6
+2026-10-01T08:49:44.7001410Z go: downloading github.com/google/pprof v0.0.0-20260802141513-ef3492d7dac3
+2026-10-01T08:49:44.9733940Z go: downloading modernc.org/fileutil v1.4.0
+2026-10-01T08:49:45.0492860Z go: downloading modernc.org/mathutil v1.7.1
+2026-10-01T08:49:45.1088120Z go: downloading gopkg.in/yaml.v2 v2.4.0
+2026-10-01T08:49:45.1647780Z go: downloading github.com/googleapis/gax-go/v2 v2.24.0
+2026-10-01T08:49:45.2113770Z go: downloading github.com/yuin/goldmark-emoji v1.0.5
+2026-10-01T08:49:45.2368390Z go: downloading github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2
+2026-10-01T08:49:45.2512520Z go: downloading github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3
+2026-10-01T08:49:45.4416380Z go: downloading github.com/dlclark/regexp2/v2 v2.2.1
+2026-10-01T08:49:46.6802720Z go: downloading github.com/alecthomas/assert/v2 v2.11.0
+2026-10-01T08:49:46.7004800Z go: downloading github.com/alecthomas/repr v0.5.2
+2026-10-01T08:49:46.7252470Z go: downloading github.com/atotto/clipboard v0.1.4
+2026-10-01T08:49:46.7413960Z go: downloading github.com/kylelemons/godebug v1.1.0
+2026-10-01T08:49:46.9041790Z go: downloading github.com/segmentio/encoding v0.5.4
+2026-10-01T08:49:47.1968330Z go: downloading github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
+2026-10-01T08:49:47.2635940Z go: downloading git.sr.ht/~jackmordaunt/go-toast v1.1.2
+2026-10-01T08:49:47.2791060Z go: downloading github.com/esiqveland/notify v0.13.3
+2026-10-01T08:49:47.3038120Z go: downloading github.com/godbus/dbus/v5 v5.2.2
+2026-10-01T08:49:47.3762600Z go: downloading github.com/jackmordaunt/icns/v3 v3.0.1
+2026-10-01T08:49:47.3848880Z go: downloading github.com/sergeymakinen/go-ico v1.0.0-beta.0
+2026-10-01T08:49:47.4138390Z go: downloading github.com/tadvi/systray v0.0.0-20190226123456-11a2b8fa57af
+2026-10-01T08:49:47.4241900Z go: downloading go.yaml.in/yaml/v3 v3.0.5
+2026-10-01T08:49:47.4546060Z go: downloading github.com/microcosm-cc/bluemonday v1.0.27
+2026-10-01T08:49:47.4768400Z go: downloading github.com/muesli/mango v0.1.0
+2026-10-01T08:49:47.4864590Z go: downloading github.com/muesli/mango-pflag v0.1.0
+2026-10-01T08:49:47.5021590Z go: downloading golang.org/x/exp/shiny v0.0.0-20250606033433-dcc06ee1d476
+2026-10-01T08:49:47.5775400Z go: downloading github.com/bahlo/generic-list-go v0.2.0
+2026-10-01T08:49:47.5845890Z go: downloading github.com/buger/jsonparser v1.1.2
+2026-10-01T08:49:47.5961680Z go: downloading github.com/fsnotify/fsnotify v1.9.0
+2026-10-01T08:49:47.6950860Z go: downloading github.com/mfridman/interpolate v0.0.2
+2026-10-01T08:49:47.7282090Z go: downloading github.com/xyproto/randomstring v1.0.5
+2026-10-01T08:49:47.7393420Z go: downloading github.com/cyphar/filepath-securejoin v0.6.1
+2026-10-01T08:49:47.7497710Z go: downloading github.com/onsi/gomega v1.34.1
+2026-10-01T08:49:47.7537940Z go: downloading github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376
+2026-10-01T08:49:47.8014030Z go: downloading github.com/kr/pretty v0.3.1
+2026-10-01T08:49:47.8194240Z go: downloading github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99
+2026-10-01T08:49:47.9163480Z go: downloading github.com/dnaeon/go-vcr v1.2.0
+2026-10-01T08:49:47.9165740Z go: downloading github.com/goccy/go-yaml v1.19.2
+2026-10-01T08:49:47.9452480Z go: downloading github.com/kaptinlin/jsonpointer v0.4.28
+2026-10-01T08:49:47.9576710Z go: downloading github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.1
+2026-10-01T08:49:47.9687980Z go: downloading github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.1
+2026-10-01T08:49:47.9837920Z go: downloading github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.19
+2026-10-01T08:49:47.9854290Z go: downloading github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.1
+2026-10-01T08:49:48.0213170Z go: downloading github.com/ncruces/go-strftime v1.0.0
+2026-10-01T08:49:48.0258100Z go: downloading modernc.org/memory v1.12.1
+2026-10-01T08:49:48.0428910Z go: downloading modernc.org/cc/v4 v4.29.2
+2026-10-01T08:49:48.0462250Z go: downloading modernc.org/ccgo/v4 v4.35.0
+2026-10-01T08:49:48.2024000Z go: downloading modernc.org/goabi0 v0.2.0
+2026-10-01T08:49:48.2295330Z go: downloading github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec
+2026-10-01T08:49:48.2445240Z go: downloading go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.71.0
+2026-10-01T08:49:48.2614310Z go: downloading go.opentelemetry.io/otel v1.46.0
+2026-10-01T08:49:48.2791900Z go: downloading go.opentelemetry.io/otel/trace v1.46.0
+2026-10-01T08:49:48.8367590Z go: downloading go.opentelemetry.io/otel/sdk v1.46.0
+2026-10-01T08:49:48.8369080Z go: downloading github.com/hexops/gotextdiff v1.0.3
+2026-10-01T08:49:48.8747570Z go: downloading github.com/segmentio/asm v1.2.1
+2026-10-01T08:49:48.8998630Z go: downloading github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
+2026-10-01T08:49:48.9106850Z go: downloading github.com/aymerick/douceur v0.2.0
+2026-10-01T08:49:48.9304900Z go: downloading google.golang.org/grpc v1.83.2
+2026-10-01T08:49:48.9397320Z go: downloading github.com/pjbgf/sha1cd v0.6.0
+2026-10-01T08:49:48.9420860Z go: downloading gopkg.in/warnings.v0 v0.1.2
+2026-10-01T08:49:48.9522580Z go: downloading github.com/pkg/errors v0.9.1
+2026-10-01T08:49:48.9735610Z go: downloading github.com/kr/text v0.2.0
+2026-10-01T08:49:48.9900250Z go: downloading github.com/rogpeppe/go-internal v1.15.0
+2026-10-01T08:49:49.1135070Z go: downloading github.com/klauspost/pgzip v1.2.6
+2026-10-01T08:49:49.1338040Z go: downloading github.com/u-root/uio v0.0.0-20240224005618-d2acac8f3701
+2026-10-01T08:49:49.1694900Z go: downloading github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.1
+2026-10-01T08:49:49.1795260Z go: downloading modernc.org/opt v0.2.0
+2026-10-01T08:49:49.1943100Z go: downloading modernc.org/sortutil v1.2.1
+2026-10-01T08:49:49.2115360Z go: downloading modernc.org/strutil v1.2.1
+2026-10-01T08:49:49.2265900Z go: downloading modernc.org/token v1.1.0
+2026-10-01T08:49:49.2448290Z go: downloading github.com/googleapis/enterprise-certificate-proxy v0.3.21
+2026-10-01T08:49:49.2634690Z go: downloading github.com/google/s2a-go v0.1.9
+2026-10-01T08:49:49.3649950Z go: downloading go.opentelemetry.io/otel/metric v1.46.0
+2026-10-01T08:49:49.5709890Z go: downloading google.golang.org/protobuf v1.36.12
+2026-10-01T08:49:49.9417690Z go: downloading go.opentelemetry.io/otel/sdk/metric v1.46.0
+2026-10-01T08:49:49.9422520Z go: downloading google.golang.org/genproto/googleapis/api v0.0.0-20260825221802-da73d73af1c5
+2026-10-01T08:49:49.9869390Z go: downloading google.golang.org/genproto v0.0.0-20260825221802-da73d73af1c5
+2026-10-01T08:49:50.0003420Z go: downloading google.golang.org/genproto/googleapis/rpc v0.0.0-20260831171406-18b4a7587f8a
+2026-10-01T08:49:50.7268950Z go: downloading golang.org/x/mod v0.39.0
+2026-10-01T08:49:50.7272590Z go: downloading modernc.org/gc/v2 v2.6.5
+2026-10-01T08:49:50.7273740Z go: downloading github.com/felixge/httpsnoop v1.1.0
+2026-10-01T08:49:50.7575330Z go: downloading github.com/go-logr/logr v1.4.4
+2026-10-01T08:49:50.7647660Z go: downloading github.com/go-logr/stdr v1.2.2
+2026-10-01T08:49:50.7880620Z go: downloading github.com/go-ole/go-ole v1.3.0
+2026-10-01T08:49:50.7938560Z go: downloading github.com/sergeymakinen/go-bmp v1.0.0
+2026-10-01T08:49:50.8026400Z go: downloading github.com/gorilla/css v1.0.1
+2026-10-01T08:49:50.8118800Z go: downloading cloud.google.com/go/auth/oauth2adapt v0.2.8
+2026-10-01T08:49:50.8221400Z go: downloading go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.71.0
+2026-10-01T08:49:50.8223590Z go: downloading github.com/pierrec/lz4/v4 v4.1.29
+2026-10-01T08:49:50.8309280Z go: downloading modernc.org/gc/v3 v3.1.5
+2026-10-01T08:49:50.8383490Z go: downloading github.com/cespare/xxhash/v2 v2.3.0
+2026-10-01T08:49:50.8455900Z go: downloading go.opentelemetry.io/auto/sdk v1.2.1
+2026-10-01T08:49:50.8653070Z go: downloading github.com/golang/protobuf v1.5.4
+2026-10-01T08:49:50.8872840Z go: downloading gonum.org/v1/gonum v0.17.0
+2026-10-01T08:49:50.9250570Z go: downloading github.com/envoyproxy/go-control-plane/envoy v1.39.0
+2026-10-01T08:49:51.7932610Z go: downloading golang.org/x/crypto v0.55.0
+2026-10-01T08:49:52.4592960Z go: downloading github.com/envoyproxy/go-control-plane v0.14.0
+2026-10-01T08:49:52.5091110Z go: downloading github.com/envoyproxy/protoc-gen-validate v1.3.3
+2026-10-01T08:49:52.5091910Z go: downloading github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10
+2026-10-01T08:49:52.5092680Z go: downloading github.com/cncf/xds/go v0.0.0-20260202195803-dba9d589def2
+2026-10-01T08:49:52.6479980Z ##[group]Run git diff --exit-code
+2026-10-01T08:49:52.6480270Z [36;1mgit diff --exit-code[0m
+2026-10-01T08:49:52.9099380Z shell: /bin/bash -e {0}
+2026-10-01T08:49:52.9100040Z env:
+2026-10-01T08:49:52.9100660Z   GOTOOLCHAIN: local
+2026-10-01T08:49:52.9101170Z ##[endgroup]
+2026-10-01T08:49:53.8275720Z ##[group]Run go build -race ./...
+2026-10-01T08:49:53.8276070Z [36;1mgo build -race ./...[0m
+2026-10-01T08:49:53.8314310Z shell: /bin/bash -e {0}
+2026-10-01T08:49:53.8314630Z env:
+2026-10-01T08:49:53.8314990Z   GOTOOLCHAIN: local
+2026-10-01T08:49:53.8315220Z ##[endgroup]
+2026-10-01T08:54:04.5083550Z ##[group]Run go test -race -failfast ./...
+2026-10-01T08:54:04.5084980Z [36;1mgo test -race -failfast ./...[0m
+2026-10-01T08:54:04.5525120Z shell: /bin/bash -e {0}
+2026-10-01T08:54:04.5526490Z env:
+2026-10-01T08:54:04.5527260Z   GOTOOLCHAIN: local
+2026-10-01T08:54:04.5528580Z ##[endgroup]
+2026-10-01T08:54:38.3259630Z ?   	github.com/charmbracelet/crush	[no test files]
+2026-10-01T08:55:20.9978420Z ok  	github.com/charmbracelet/crush/internal/agent	24.958s
+2026-10-01T08:55:21.0592960Z ?   	github.com/charmbracelet/crush/internal/agent/agenttest	[no test files]
+2026-10-01T08:55:21.0695690Z ok  	github.com/charmbracelet/crush/internal/agent/hyper	1.176s
+2026-10-01T08:55:21.0800660Z ?   	github.com/charmbracelet/crush/internal/agent/notify	[no test files]
+2026-10-01T08:55:21.0908750Z ok  	github.com/charmbracelet/crush/internal/agent/prompt	1.272s
+2026-10-01T08:55:21.1121910Z ok  	github.com/charmbracelet/crush/internal/agent/tools	10.165s
+2026-10-01T08:55:21.1244640Z ok  	github.com/charmbracelet/crush/internal/agent/tools/mcp	7.326s
+2026-10-01T08:55:21.1245480Z ?   	github.com/charmbracelet/crush/internal/ansiext	[no test files]
+2026-10-01T08:55:21.1346840Z ok  	github.com/charmbracelet/crush/internal/apigen	1.147s
+2026-10-01T08:55:21.1448500Z ok  	github.com/charmbracelet/crush/internal/app	2.225s
+2026-10-01T08:55:39.7116060Z ok  	github.com/charmbracelet/crush/internal/backend	16.888s
+2026-10-01T08:55:39.7140860Z ok  	github.com/charmbracelet/crush/internal/client	2.644s
+2026-10-01T08:55:39.7149060Z ?   	github.com/charmbracelet/crush/internal/clipboard	[no test files]
+2026-10-01T08:55:39.7150290Z ok  	github.com/charmbracelet/crush/internal/cmd	2.872s
+2026-10-01T09:00:37.6087640Z --- FAIL: TestClientServerSpawnRace (300.14s)
+2026-10-01T09:00:37.6249410Z     race_test.go:58: go build crush: signal: killed
+2026-10-01T09:00:37.6276600Z FAIL
+2026-10-01T09:00:37.6277190Z FAIL	github.com/charmbracelet/crush/internal/cmd/clientserverrace	300.287s
+2026-10-01T09:00:37.6278500Z ok  	github.com/charmbracelet/crush/internal/commands	4.940s
+2026-10-01T09:00:37.6279010Z ok  	github.com/charmbracelet/crush/internal/config	23.078s
+2026-10-01T09:00:37.6282460Z ok  	github.com/charmbracelet/crush/internal/csync	1.342s
+2026-10-01T09:00:37.6283020Z ok  	github.com/charmbracelet/crush/internal/db	5.648s
+2026-10-01T09:00:37.6283990Z ?   	github.com/charmbracelet/crush/internal/diff	[no test files]
+2026-10-01T09:00:37.6288220Z ok  	github.com/charmbracelet/crush/internal/diffdetect	1.057s
+2026-10-01T09:00:37.6289190Z ok  	github.com/charmbracelet/crush/internal/discover	1.197s
+2026-10-01T09:00:37.6289630Z ?   	github.com/charmbracelet/crush/internal/dns	[no test files]
+2026-10-01T09:00:37.6290510Z ok  	github.com/charmbracelet/crush/internal/env	1.183s
+2026-10-01T09:00:37.6295170Z ok  	github.com/charmbracelet/crush/internal/event	1.122s
+2026-10-01T09:00:37.6302480Z ok  	github.com/charmbracelet/crush/internal/filepathext	1.048s
+2026-10-01T09:00:37.6307190Z ok  	github.com/charmbracelet/crush/internal/filetracker	3.217s
+2026-10-01T09:00:37.6310520Z ?   	github.com/charmbracelet/crush/internal/format	[no test files]
+2026-10-01T09:00:37.6319820Z ok  	github.com/charmbracelet/crush/internal/fsext	3.376s
+2026-10-01T09:00:37.6324950Z ok  	github.com/charmbracelet/crush/internal/gitutil	2.138s
+2026-10-01T09:00:37.6325720Z ok  	github.com/charmbracelet/crush/internal/herdr	3.688s
+2026-10-01T09:00:37.6326790Z ?   	github.com/charmbracelet/crush/internal/history	[no test files]
+2026-10-01T09:00:37.6332640Z ok  	github.com/charmbracelet/crush/internal/home	1.219s
+2026-10-01T09:00:37.6334810Z ok  	github.com/charmbracelet/crush/internal/hooks	6.345s
+2026-10-01T09:00:37.6335360Z ok  	github.com/charmbracelet/crush/internal/lock	1.511s
+2026-10-01T09:00:37.7083610Z ok  	github.com/charmbracelet/crush/internal/log	1.160s
+2026-10-01T09:00:37.7085540Z ?   	github.com/charmbracelet/crush/internal/login	[no test files]
+2026-10-01T09:00:37.7099550Z ?   	github.com/charmbracelet/crush/internal/logout	[no test files]
+2026-10-01T09:00:37.7119920Z ok  	github.com/charmbracelet/crush/internal/lsp	3.512s
+2026-10-01T09:00:37.7121300Z ok  	github.com/charmbracelet/crush/internal/lsp/util	1.174s
+2026-10-01T09:00:37.7130000Z ok  	github.com/charmbracelet/crush/internal/message	14.602s
+2026-10-01T09:00:37.7135970Z ?   	github.com/charmbracelet/crush/internal/oauth	[no test files]
+2026-10-01T09:00:37.7141320Z ok  	github.com/charmbracelet/crush/internal/oauth/callback	1.117s
+2026-10-01T09:00:37.7146160Z ok  	github.com/charmbracelet/crush/internal/oauth/copilot	1.215s
+2026-10-01T09:00:37.7150020Z ?   	github.com/charmbracelet/crush/internal/oauth/hyper	[no test files]
+2026-10-01T09:00:37.7151140Z ok  	github.com/charmbracelet/crush/internal/oauth/mcp	3.574s
+2026-10-01T09:00:37.7155490Z ok  	github.com/charmbracelet/crush/internal/oauth/openai	1.200s
+2026-10-01T09:00:37.7159870Z ok  	github.com/charmbracelet/crush/internal/permission	1.159s
+2026-10-01T09:00:37.7161470Z ok  	github.com/charmbracelet/crush/internal/projects	4.805s
+2026-10-01T09:00:37.7168140Z ok  	github.com/charmbracelet/crush/internal/proto	4.448s
+2026-10-01T09:00:37.7175010Z ?   	github.com/charmbracelet/crush/internal/pubsub	[no test files]
+2026-10-01T09:00:37.7175630Z ?   	github.com/charmbracelet/crush/internal/question	[no test files]
+2026-10-01T09:00:37.7966350Z ok  	github.com/charmbracelet/crush/internal/server	13.131s
+2026-10-01T09:00:37.7967140Z ok  	github.com/charmbracelet/crush/internal/session	5.436s
+2026-10-01T09:00:37.7969620Z ok  	github.com/charmbracelet/crush/internal/shell	31.718s
+2026-10-01T09:00:37.7970160Z ok  	github.com/charmbracelet/crush/internal/shellconfig	4.627s
+2026-10-01T09:00:37.7974170Z ok  	github.com/charmbracelet/crush/internal/skills	1.335s
+2026-10-01T09:00:37.7974960Z ok  	github.com/charmbracelet/crush/internal/stringext	1.390s
+2026-10-01T09:00:37.7975530Z ok  	github.com/charmbracelet/crush/internal/ui/anim	5.426s
+2026-10-01T09:00:37.7977960Z ok  	github.com/charmbracelet/crush/internal/ui/attachments	9.845s
+2026-10-01T09:05:53.8158540Z ok  	github.com/charmbracelet/crush/internal/ui/chat	332.959s
+2026-10-01T09:05:53.8159980Z ok  	github.com/charmbracelet/crush/internal/ui/common	5.913s
+2026-10-01T09:05:53.8162100Z FAIL
+2026-10-01T09:05:54.5130200Z ##[error]Process completed with exit code 1.
+2026-10-01T09:05:54.5856090Z Post job cleanup.
+2026-10-01T09:05:55.3801850Z [command]/opt/homebrew/bin/git version
+2026-10-01T09:05:55.4173390Z git version 2.55.0
+2026-10-01T09:05:55.4201310Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/7f9a73d8-c7ad-4ad3-9876-10e6065ae65c/.gitconfig'
+2026-10-01T09:05:55.4211980Z Temporarily overriding HOME='/Users/runner/work/_temp/7f9a73d8-c7ad-4ad3-9876-10e6065ae65c' before making global git config changes
+2026-10-01T09:05:55.4212970Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-01T09:05:55.4217140Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/crush/crush
+2026-10-01T09:05:55.4422230Z Removing SSH command configuration
+2026-10-01T09:05:55.4432310Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-01T09:05:55.4532140Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-01T09:05:55.6753150Z Removing HTTP extra header
+2026-10-01T09:05:55.6763440Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-01T09:05:55.6863500Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-01T09:05:55.9222550Z Removing includeIf entries pointing to credentials config files
+2026-10-01T09:05:55.9331880Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-01T09:05:55.9655160Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-01T09:05:56.2217370Z Cleaning up orphan processes

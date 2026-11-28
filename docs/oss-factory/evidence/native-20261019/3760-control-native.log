@@ -1,0 +1,6 @@
+case=empty assistants=0 payload_parts=0
+case=whitespace assistants=1 payload_parts=0
+case=content assistants=1 payload_parts=1
+case=reasoning assistants=1 payload_parts=1
+2026/10/19 06:14:07 WARN Injecting synthetic tool result for orphaned tool call tool_call_id=call1 tool_name=view
+case=tool assistants=1 payload_parts=1

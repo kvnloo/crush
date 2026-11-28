@@ -1,0 +1,43 @@
+package main
+
+import (
+ "context"
+ "encoding/json"
+ "fmt"
+ "net/http"
+ "net/http/httptest"
+ "net/url"
+ "os"
+ "regexp"
+ "strings"
+ "unicode/utf8"
+
+ "charm.land/fantasy"
+ "github.com/charmbracelet/crush/internal/agent/tools"
+)
+
+type redirect struct{ base *url.URL }
+func (r redirect) RoundTrip(req *http.Request) (*http.Response,error) {
+ if req.URL.String() != "https://sourcegraph.com/.api/graphql" { panic("unexpected boundary") }
+ copy:=req.Clone(req.Context()); u:=*req.URL; u.Scheme=r.base.Scheme;u.Host=r.base.Host;copy.URL=&u
+ return http.DefaultTransport.RoundTrip(copy)
+}
+func main(){
+ payload:=strings.Repeat("你好👨‍👩‍👧‍👦x",20000)
+ requests:=0
+ server:=httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter,r *http.Request){
+  requests++; if r.Method!="POST" || r.URL.Path!="/.api/graphql" { panic("bad request") }
+  var request map[string]any; if err:=json.NewDecoder(r.Body).Decode(&request);err!=nil{panic(err)}
+  if request["variables"].(map[string]any)["query"]!="repo:fixture match" {panic("wrong query")}
+  json.NewEncoder(w).Encode(map[string]any{"data":map[string]any{"search":map[string]any{"results":map[string]any{"matchCount":1,"resultCount":1,"results":[]any{map[string]any{"__typename":"FileMatch","repository":map[string]any{"name":"fixture/repo"},"file":map[string]any{"path":"huge.go","content":"match\n"+payload},"lineMatches":[]any{map[string]any{"lineNumber":1,"preview":"match"}}}}}}}})
+ }));defer server.Close();u,_:=url.Parse(server.URL)
+ tool:=tools.NewSourcegraphTool(&http.Client{Transport:redirect{u}})
+ response,err:=tool.Run(context.Background(),fantasy.ToolCall{ID:"native",Name:"sourcegraph",Input:`{"query":"repo:fixture match","context_window":1}`});if err!=nil{panic(err)}
+ out:=response.Content
+ truncated:=strings.Contains(out,"lines truncated")
+ spillOK:=false
+ if m:=regexp.MustCompile(`full output: ([^\]]+)`).FindStringSubmatch(out);len(m)==2{b,e:=os.ReadFile(m[1]);spillOK=e==nil&&strings.Contains(string(b),payload);os.Remove(m[1])}
+ fmt.Printf("requests=%d utf8=%t bytes=%d truncated=%t full_spill_preserved=%t header=%t\n",requests,utf8.ValidString(out),len(out),truncated,spillOK,strings.Contains(out,"fixture/repo/huge.go"))
+ if os.Getenv("EXPECT_RED")=="1" {if truncated{panic("control unexpectedly truncated")};return}
+ if requests!=1||!utf8.ValidString(out)||!truncated||!spillOK {panic("native consumer failed")}
+}

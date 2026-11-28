@@ -1,0 +1,26 @@
+package main
+
+import (
+ "fmt"
+ "os"
+ "charm.land/fantasy"
+ "github.com/charmbracelet/crush/internal/agent"
+ "github.com/charmbracelet/crush/internal/message"
+)
+func main(){
+ cases:=[]struct{name string; parts []message.ContentPart; keep bool}{
+ {"empty",[]message.ContentPart{message.TextContent{Text:""}},false},
+ {"whitespace",[]message.ContentPart{message.TextContent{Text:" \t\n\u2003"}},false},
+ {"content",[]message.ContentPart{message.TextContent{Text:" ok "}},true},
+ {"reasoning",[]message.ContentPart{message.TextContent{Text:" "},message.ReasoningContent{Thinking:"plan"}},true},
+ {"tool",[]message.ContentPart{message.TextContent{Text:" "},message.ToolCall{ID:"call1",Name:"view",Input:`{"file_path":"fixture.txt"}`}},true},
+ }
+ for _,c:=range cases{
+  history:=agent.NativeSmokePrepare([]message.Message{{Role:message.User,Parts:[]message.ContentPart{message.TextContent{Text:"hello"}}},{Role:message.Assistant,Parts:c.parts}})
+  n:=0; parts:=0; for _,m:=range history{if m.Role==fantasy.MessageRoleAssistant{n++;parts+=len(m.Content)}}
+  fmt.Printf("case=%s assistants=%d payload_parts=%d\n",c.name,n,parts)
+  expected:=c.keep; if os.Getenv("EXPECT_RED")=="1"&&c.name=="whitespace" {expected=true}
+  if (n>0)!=expected {panic("incorrect consumer retention: "+c.name)}
+  if c.keep&&parts==0 {panic("lost meaningful payload")}
+ }
+}
